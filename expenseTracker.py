@@ -1,25 +1,27 @@
 from expense import Expense
 
-def main():
-    print("Welcome To Your  Expense Tracker ! ")
 
-    # Get user input for expense
+def main():
+    # Welcome message
+    print("Welcome To Your Expense Tracker!")
+
+    # Get user input for an expense
     expense = get_user_expense()
     print(expense)
 
-    # Write their expenses to a file
-    #save_user_expense_to_file()
-
-    # Read file and summarize expenses
-    #summarize_user_expense()
+    # Uncomment the following lines to save and summarize expenses
+    # save_user_expense_to_file()
+    # summarize_user_expense()
 
 
 def get_user_expense():
-   # print("Getting User Expense")
+    # Get expense name from user
     expense_name = input("Enter expense name: \n")
-    # Cast to a float
+
+    # Get expense amount from user and convert to float
     expense_amount = float(input("Enter expense amount: \n"))
 
+    # List of expense categories
     expense_categories = [
         "🍔Food",
         "🏡Home",
@@ -28,39 +30,41 @@ def get_user_expense():
         "✨Misc",
     ]
 
-    #Keep repeating prompt until we get valid user input
+    # Prompt user to select a valid category
     while True:
         print("Select a category:")
-        # Show them the list of categories
-        # 2 pull response index and item value
-        for i, category_name in enumerate(expense_categories):
-            print(f" {i+1}. {category_name}")
 
+        # Display the list of categories
+        for i, category_name in enumerate(expense_categories):
+            print(f" {i + 1}. {category_name}")
+
+        # Define the valid range for input
         value_range = f"[1 - {len(expense_categories)}]"
-        # Cast to int because input only takes in string
-        # Subtract 1 because we added one
-        # Error handling
+
+        # Try to get a valid category number from user
         try:
             selected_index = int(input(f"Enter category number {value_range}\n")) - 1
         except ValueError:
-            print("Invalid Input! Please enter a number")
+            print("Invalid input! Please enter a number.")
             continue
 
-        # 0 - 4
+        # Check if the selected index is within the valid range
         if selected_index in range(len(expense_categories)):
             selected_category = expense_categories[selected_index]
+            # Create and return a new Expense object
             new_expense = Expense(name=expense_name, category=selected_category, amount=expense_amount)
             return new_expense
-
         else:
             print("Invalid selection. Please try again.")
 
+
 def save_user_expense_to_file():
-    #print("Saving User Expense to file")
+    # Placeholder for saving user expense to file
     pass
 
+
 def summarize_user_expense():
-    #print("Summarizing User Expense")
+    # Placeholder for summarizing user expenses
     pass
 
 
