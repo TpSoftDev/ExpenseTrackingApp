@@ -4,15 +4,16 @@ from expense import Expense
 def main():
     # Welcome message
     print("Welcome To Your Expense Tracker!")
+    expense_file_path = "expenses.csv"
 
     # Get user input for an expense
     expense = get_user_expense()
-    print(expense)
 
-    # Uncomment the following lines to save and summarize expenses
-    # save_user_expense_to_file()
-    # summarize_user_expense()
+    # Write their expense to a file
+    save_user_expense_to_file(expense, expense_file_path)
 
+    # Read file and summarize expenses
+    summarize_user_expense(expense_file_path)
 
 def get_user_expense():
     # Get expense name from user
@@ -57,14 +58,15 @@ def get_user_expense():
         else:
             print("Invalid selection. Please try again.")
 
+def save_user_expense_to_file(expense, expense_file_path):
+    print(f"Saving User Expense : {expense} to {expense_file_path}")
+    #Will create new file if file doesn't already exist
+    with open(expense_file_path, "a") as f:
+        f.write(f"{expense.name},{expense.category},{expense.amount}\n")
 
-def save_user_expense_to_file():
-    # Placeholder for saving user expense to file
-    pass
 
 
-def summarize_user_expense():
-    # Placeholder for summarizing user expenses
+def summarize_user_expense(expense_file_path):
     pass
 
 
